@@ -175,6 +175,12 @@
                     }
                     var minutes = data.getMinutes(); //获取当前的分钟数
                     var seconds = data.getSeconds();
+                    if (minutes < 10) {
+                        minutes = '0' + minutes
+                    }
+                    if (seconds < 10) {
+                        seconds = '0' + seconds
+                    }
                     return (this.time = `当前时间: ${month}月${dates}日 ${timeBlock}${hours}:${minutes}:${seconds}`);
                 },
             },
