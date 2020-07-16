@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+li {
+  list-style-type: none;
+}
+input[type="date"]::-webkit-inner-spin-button {
+  visibility: hidden;
+}
+@font-face {
+  font-family: "icomoon";
+  src: url("../fonts/icomoon.eot?1g87pc");
+  src: url("../fonts/icomoon.eot?1g87pc#iefix") format("embedded-opentype"),
+    url("../fonts/icomoon.ttf?1g87pc") format("truetype"),
+    url("../fonts/icomoon.woff?1g87pc") format("woff"),
+    url("../fonts/icomoon.svg?1g87pc#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+/* 安卓手机上的select有灰色背景，解决方法 */
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: 640px;
+  background-color: #e1e1e1;
+}
+header {
+  position: relative;
+  height: 184px;
+  background-color: #3697dc;
+}
+header > span {
+  position: absolute;
+  top: 16px;
+  left: 28px;
+  font-family: "icomoon";
+  color: #fff;
+  font-size: 24px;
+}
+header > h2 {
+  position: absolute;
+  top: 80px;
+  left: 28px;
+  color: #fff;
+  font-size: 27px;
+}
+.header-top {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  background-color: #3697dc;
+  padding-left: 15px;
+  z-index: 9999;
+}
+.header-top > h2 {
+  color: #fff;
+  font-size: 24px;
+}
+.header-top > h2 > span {
+  font-family: "icomoon";
+  color: #fff;
+  font-size: 24px;
+}
+/* 标题 */
+.header {
+  position: relative;
+  width: 100%;
+}
+.title {
+  position: absolute;
+  top: 132px;
+  left: 3%;
+  width: 94%;
+  margin: 0 auto;
+  height: 104px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.title > h2 {
+  position: absolute;
+  top: 28px;
+  left: 100px;
+  color: #3697dc;
+  font-size: 27px;
+}
+.title > span {
+  position: absolute;
+  top: 62px;
+  left: 26px;
+  font-size: 15px;
+  font-weight: 600;
+}
+/* 二维码区域 */
+.erweima {
+  margin-top: 65px;
+  margin-left: 3%;
+  width: 94%;
+  height: 283px;
+  background-color: #fff;
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 32px;
+}
+.erweima > img {
+  width: 200px;
+  height: 200px;
+}
+.erweima > span {
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+/* 基本信息 */
+.info {
+  margin-top: 15px;
+  overflow: hidden;
+  width: 100%;
+}
+.info li,
+.comment li {
+  position: relative;
+  float: left;
+  width: 94%;
+  height: 55px;
+  line-height: 55px;
+  background-color: #fff;
+  margin-left: 3%;
+  margin-bottom: 3px;
+  padding: 0 20px;
+}
+.info li:nth-child(1) {
+  border-radius: 3px 3px 0 0;
+}
+.info li:nth-child(5) {
+  border-radius: 0 0 3px 3px;
+}
+.info li > h3,
+.comment li > h3 {
+  font-size: 15px;
+}
+.info li > span,
+.comment li > span {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 15px;
+}
+/* 请假信息 */
+.leave-reason {
+  overflow: hidden;
+  width: 94%;
+  margin-top: 15px;
+  margin-left: 3%;
+  border-radius: 3px;
+}
+.leave-reason > h2 {
+  font-size: 15px;
+  padding: 15px 0;
+  background-color: #fff;
+  text-align: center;
+}
+.leave-reason > ul {
+  overflow: hidden;
+}
+.leave-reason > ul > li {
+  float: left;
+  width: 100%;
+  margin-top: 3px;
+  background-color: #fff;
+  padding: 10px 20px 10px 20px;
+}
+.leave-reason > ul > li > i {
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.leave-reason > ul > li > select {
+  display: block;
+  margin-top: 15px;
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  outline: none;
+  background-color: #fff;
+}
+.leave-reason > ul > li > textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding-left: 2px;
+  border: 1px solid #f1f1f1;
+  outline: none;
+}
+.leave-reason > ul > li > img {
+  width: 100%;
+}
+/* 审核意见 */
+.comment {
+  overflow: hidden;
+  width: 94%;
+  margin-left: 3%;
+  margin-top: 15px;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+
+.comment li {
+  width: 100%;
+  margin-left: 0;
+}
+
+/* 输入信息 */
+.shuru-info {
+  width: 94%;
+  margin-left: 3%;
+  background-color: #fff;
+  padding: 20px;
+  line-height: 2;
+  border-radius: 3px;
+}
+.shuru-info > label {
+  display: block;
+  position: relative;
+}
+.shuru-info > label > input {
+  position: absolute;
+  top: 6px;
+  left: 80px;
+  outline: none;
+  padding-left: 10px;
+}
