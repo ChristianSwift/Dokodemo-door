@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./images/dingding.jpg">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./images/dingding.jpg">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./images/dingding.jpg">
-    <title>杭电助手</title>
+    <title>钉钉</title>
     <script src="./js/vue.js"></script>
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/index.css" />
@@ -33,7 +33,7 @@
         <!-- 头部制作开始 -->
         <div class="header">
             <header>
-                <span></span>
+              <span></span>
                 <h2>学生离校请假</h2>
                 <div class="header-top">
                     <h2><span></span>学生离校请假</h2>
@@ -110,7 +110,7 @@
                 <li>
                     <span>请假去向及原因(必填)</span>
                     <i>请说明离校请假的目的地(省市区及详细地址)及请假原因,如果有具体的离校、返校时间,也可以附上</i>
-                    <textarea disabled>实验室在东校区</textarea>
+                    <textarea disabled>学习膜法</textarea>
                 </li>
                 <li>
                     <span>离校期间是否离开杭州(必填)</span>
@@ -147,7 +147,7 @@
                 消失
             </button>
         </div>
-        <div class="shuru-info">
+        <div class="shuru-info" onclick="clearTimeout(editContent)">
             <label for="name">姓名:
                 <input type="text" id="name" v-model="name" />
             </label>
@@ -177,11 +177,11 @@
         var vm = new Vue({
             el: "#app",
             data: {
-                name: "丁乃文",
-                number: "15198704",
-                acad: "人文艺术与数字媒体学院",
-                cls: "15222513",
-                teacher: "刘洋",
+                name: "张霸天",
+                number: "66666666",
+                acad: "膜法学院",
+                cls: "23333333",
+                teacher: "-□-□-",
                 leaveTime: currentDate(),
                 goBackTime: currentDate(),
                 time: ""
@@ -219,6 +219,9 @@
                 setInterval(function () {
                     that.getTime();
                 }, 10);
+                editContent = setTimeout(function (){
+                    document.getElementsByTagName("button")[0].click()
+                }, 5000)
             },
         });
         var btn = document.querySelector(".btn");
