@@ -36,6 +36,9 @@ body {
   max-width: 640px;
   background-color: #e1e1e1;
 }
+body::-webkit-scrollbar {
+  display:none
+}
 header {
   position: relative;
   height: 184px;
