@@ -132,12 +132,6 @@
                 that.getStudentInfo();
             },
         });
-        var btn = document.querySelector(".btn");
-        var info = document.querySelector(".shuru-info");
-        btn.onclick = function () {
-            info.style.display = 'none'
-            this.style.display = 'none'
-        }
         function studentInfo(){
             var request = new XMLHttpRequest();
             request.open("get", "./config.js");
