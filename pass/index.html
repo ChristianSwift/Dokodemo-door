@@ -1,0 +1,225 @@
+<html lang="zh-CN">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>杭电助手 凭证</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/bundle.css">
+  </head>
+  
+  <body>
+    <main class="container" id="app">
+      <section>
+        <hstack>
+          <img class="logo" src="img/icon.png" alt="HDUHelp Logo">
+          <h1>杭电助手 凭证</h1>
+          <spacer></spacer>
+        </hstack>
+      </section>
+      <section>
+        <vstack>
+          <b>学生离校请假</b>
+          <span>离校请假</span></vstack>
+      </section>
+      <section>
+        <list spacing="xs">
+          <hstack>
+            <b>姓名</b>
+            <spacer></spacer>
+            <span> {{name}}</span></hstack>
+          <hstack>
+	          <b>学号</b>
+            <spacer></spacer>
+            <span> {{number}}</span></hstack>
+          <hstack>
+            <b>健康档案</b>
+            <spacer></spacer>
+            <span> 该学生14天内健康状况无异常，健康码为绿码</span></hstack>
+          <hstack>
+            <b>请假记录</b>
+            <spacer></spacer>
+            <span> 该学生7日内请假 0 次,未出门 0 次,未归(含在外住宿) 0 次,在外时间超时 0 次</span></hstack>
+          <hstack>
+            <b>学院</b>
+            <spacer></spacer>
+            <span> {{acad}}</span></hstack>
+          <hstack>
+            <b>班级</b>
+            <spacer></spacer>
+            <span> {{cls}}</span></hstack>
+          <hstack>
+            <b>辅导员</b>
+            <spacer></spacer>
+            <span> {{teacher}}</span></hstack>
+        </list>
+      </section>
+      <section>
+      <p>申请于 {{applyTime}}</p>
+      <p>最后更新于 {{lastUpdate}}</p>
+      </section>
+      <section>
+        <h4 class="card-title">申请材料</h4>
+        <list spacing="xs">
+          <vstack>
+            <b>请假类型</b>
+            <span>{{type}}</span></vstack>
+          <vstack>
+            <b>请假开始日期</b>
+            <span>{{leaveTime}}</span></vstack>
+          <vstack>
+            <b>请假结束日期</b>
+            <span>{{goBackTime}}</span></vstack>
+          <vstack>
+            <b>请假原因</b>
+            <span> {{reason}}</span></vstack>
+          <vstack>
+            <b>离校期间是否离开浙江</b>
+            <span>否</span></vstack>
+          <vstack>
+            <b>签名</b>
+            <img src="../sign.png" alt="< 图片 >" class="w-full"></vstack>
+        </list>
+      </section>
+      <section>
+        <h4 class="card-title">审核意见</h4>
+        <p>&lt; 无 &gt;</p>
+        <p>&lt; 无 &gt;</p>
+      </section>
+      <p class="text-center text-white print:text-black">由杭电助手提供技术支持</p>
+      <p class="text-center hidden print:block">本打印副本生成于<?php echo gmstrftime("%a %b %d %Y %T",time()); ?>GMT+0800 (中国标准时间)</p></main>
+
+      <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: "",
+                number: "",
+                acad: "",
+                cls: "",
+                teacher: "",
+                leaveTime: currentDate(),
+                goBackTime: currentDate(),
+                type: "",
+                reason: "",
+                time: "",
+                applyTime: applyTime(),
+                lastUpdate: lastUpdate()
+            },
+            methods: {
+                getStudentInfo: function () {
+                    axios
+                    .get('../config.js')
+                    .then(response => (
+                        this.name = response.data.stuname,
+                        this.number = response.data.schoolid,
+                        this.acad = response.data.academy,
+                        this.cls = response.data.class,
+                        this.teacher = response.data.teacher,
+                        this.type = response.data.type,
+                        this.reason = response.data.reason
+                    ))
+                    .catch(function (error) { // 请求失败处理
+                        console.log(error);
+                    });
+                }
+            },
+            created: function () {
+                var that = this;
+                that.getStudentInfo();
+                setInterval(function () {
+                    that.getTime();
+                }, 10);
+                editContent = setTimeout(function (){
+                    document.getElementsByTagName("button")[0].click()
+                }, 5000)
+            },
+        });
+        var btn = document.querySelector(".btn");
+        var info = document.querySelector(".shuru-info");
+        btn.onclick = function () {
+            info.style.display = 'none'
+            this.style.display = 'none'
+        }
+        function studentInfo(){
+            var request = new XMLHttpRequest();
+            request.open("get", "./config.js");
+            request.send(null);
+            request.onload = function () {
+                if (request.status == 200) {
+                    var json = JSON.parse(request.responseText);
+                    return json.stuname;
+                }
+            }
+        }
+        function currentDate(){
+            var data = new Date();
+            var year = String(data.getFullYear());
+            if((data.getMonth()+1)<10){
+                var month = "0"+String(data.getMonth()+1)
+            }else{
+                var month = String(data.getMonth()+1)
+            };
+            if(data.getMonth()<10){
+                var dates = "0"+String(data.getDate())
+            }else{
+                var dates = String(data.getDate())
+            };
+            return year + "/" + month + "/" + dates;
+        }
+        function applyTime(){
+            var data = new Date();
+            var year = String(data.getFullYear());
+            if((data.getMonth()+1)<10){
+                var month = "0"+String(data.getMonth()+1)
+            }else{
+                var month = String(data.getMonth()+1)
+            };
+            if(data.getMonth()<10){
+                var dates = "0"+String(data.getDate())
+            }else{
+                var dates = String(data.getDate())
+            };
+            return year + "/" + month + "/" + dates + " 上午08:10:23";
+        }
+        function lastUpdate() {
+          var data = new Date(); //创建一个当前的Date实例
+          var year = data.getFullYear();
+          var month = data.getMonth() + 1; //获取当前的月份-1
+          var dates = data.getDate(); //获取当前的日期
+          var hours = data.getHours()-2; //获取当前的小时数
+          var timeBlock = "";
+          if (hours < 12) {
+              timeBlock = "上午";
+          } else if (hours < 19) {
+              timeBlock = "下午";
+          } else if (hours < 24) {
+              timeBlock = "晚上";
+          }
+          if((data.getMonth()+1)<10){
+              var month = "0"+String(data.getMonth()+1)
+          }else{
+              var month = String(data.getMonth()+1)
+          };
+          if(data.getMonth()<10){
+              var dates = "0"+String(data.getDate())
+          }else{
+              var dates = String(data.getDate())
+          };
+          var minutes = data.getMinutes();
+          var seconds = data.getSeconds();
+          if (minutes < 10) {
+              minutes = '0' + minutes
+          }
+          if (seconds < 10) {
+              seconds = '0' + seconds
+          }
+          return year + "/" + month + "/" + dates + " " + timeBlock + hours + ":" + minutes + ":" + seconds;
+      }
+      </script>
+  </body>
+
+</html>
