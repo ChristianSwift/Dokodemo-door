@@ -130,12 +130,6 @@
             created: function () {
                 var that = this;
                 that.getStudentInfo();
-                setInterval(function () {
-                    that.getTime();
-                }, 10);
-                editContent = setTimeout(function (){
-                    document.getElementsByTagName("button")[0].click()
-                }, 5000)
             },
         });
         var btn = document.querySelector(".btn");
